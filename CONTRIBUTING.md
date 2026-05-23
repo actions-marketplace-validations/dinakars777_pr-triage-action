@@ -17,6 +17,12 @@ Thanks for your interest in contributing! Here's how to get started.
 
 ## Testing
 
+Run the local regression tests:
+
+```bash
+tests/triage-action.test.sh
+```
+
 Run the triage script locally against any public repo:
 
 ```bash
