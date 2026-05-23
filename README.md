@@ -96,6 +96,10 @@ That's it. Every new PR gets auto-triaged.
 | `enable-contributor-profile` | `true` | Show contributor history and tier |
 | `duplicate-threshold` | `50` | Minimum file overlap % to flag |
 
+## Roadmap
+
+See [docs/ROADMAP.md](docs/ROADMAP.md) for current improvement priorities and release-readiness work.
+
 ## Architecture
 
 ```
