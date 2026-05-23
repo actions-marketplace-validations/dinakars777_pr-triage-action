@@ -174,7 +174,7 @@ if [[ "$ENABLE_DUPLICATE_CHECK" == "true" ]]; then
   echo "🔍 Checking for duplicates..."
 
   TARGET_FILES="$FILE_PATHS"
-  TARGET_FILE_COUNT=$(echo "$TARGET_FILES" | grep -c . || echo "0")
+  TARGET_FILE_COUNT=$(grep -c . <<< "$TARGET_FILES" || true)
 
   if [[ "$TARGET_FILE_COUNT" -gt 0 ]]; then
     # Get recent open PRs and their files via API
@@ -185,7 +185,7 @@ if [[ "$ENABLE_DUPLICATE_CHECK" == "true" ]]; then
     DUPLICATES_FOUND=""
 
     if [[ -n "$OPEN_PRS" ]]; then
-      echo "$OPEN_PRS" | jq -c '.' 2>/dev/null | while IFS= read -r other_pr; do
+      while IFS= read -r other_pr; do
         OTHER_NUM=$(echo "$other_pr" | jq -r '.number')
         OTHER_TITLE=$(echo "$other_pr" | jq -r '.title')
         OTHER_AUTHOR=$(echo "$other_pr" | jq -r '.author.login')
@@ -194,7 +194,7 @@ if [[ "$ENABLE_DUPLICATE_CHECK" == "true" ]]; then
         # Count file overlap
         OVERLAP=0
         while IFS= read -r f; do
-          if echo "$OTHER_FILES" | grep -qF "$f"; then
+          if echo "$OTHER_FILES" | grep -Fxq "$f"; then
             OVERLAP=$((OVERLAP + 1))
           fi
         done <<< "$TARGET_FILES"
@@ -214,7 +214,7 @@ if [[ "$ENABLE_DUPLICATE_CHECK" == "true" ]]; then
           fi
           DUPLICATES_FOUND="${DUPLICATES_FOUND}\n| #${OTHER_NUM} | ${OTHER_TITLE} | @${OTHER_AUTHOR} | ${OVERLAP_PCT}% | ${RISK_LEVEL} |"
         fi
-      done
+      done < <(echo "$OPEN_PRS" | jq -c '.' 2>/dev/null)
     fi
 
     if [[ -n "$DUPLICATES_FOUND" ]]; then
