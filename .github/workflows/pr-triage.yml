@@ -1,5 +1,5 @@
-# Example workflow for using the OpenClaw PR Triage Action
-# Copy this to your repo at .github/workflows/pr-triage.yml
+# Self-test workflow for this action repository.
+# The README contains the copy/paste workflow for downstream repositories.
 
 name: PR Triage
 
@@ -16,8 +16,11 @@ jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out action
+        uses: actions/checkout@v4
+
       - name: Triage PR
-        uses: dinakars777/openclaw-triage-action@main
+        uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-labels: true

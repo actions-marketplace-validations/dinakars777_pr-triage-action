@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Triage PR
-        uses: dinakars777/openclaw-triage-action@main
+        uses: dinakars777/pr-triage-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -99,7 +99,7 @@ That's it. Every new PR gets auto-triaged.
 ## Architecture
 
 ```
-openclaw-triage-action/
+pr-triage-action/
 ├── action.yml                          # Action metadata and inputs
 ├── scripts/
 │   └── triage-action.sh                # Core triage engine
