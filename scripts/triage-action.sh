@@ -361,7 +361,7 @@ $(echo -e "$RISK_REASONS_STR")
 **Suggested labels:**${LABELS_STR}
 ${DUPLICATE_SECTION}${CONTRIBUTOR_SECTION}
 ---
-<sub>🤖 Auto-triaged by <a href=\"https://github.com/dinakars777/openclaw-triage-action\">openclaw-triage-action</a></sub>"
+<sub>🤖 Auto-triaged by <a href=\"https://github.com/dinakars777/pr-triage-action\">pr-triage-action</a></sub>"
 
 ###############################################################################
 # 9. Post comment on the PR
